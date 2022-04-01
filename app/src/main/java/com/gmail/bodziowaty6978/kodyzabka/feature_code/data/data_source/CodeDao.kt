@@ -1,13 +1,10 @@
 package com.gmail.bodziowaty6978.kodyzabka.feature_code.data.data_source
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
 import kotlinx.coroutines.flow.Flow
 
-
+@Dao
 interface CodeDao {
 
     @Query("SELECT * FROM code")
