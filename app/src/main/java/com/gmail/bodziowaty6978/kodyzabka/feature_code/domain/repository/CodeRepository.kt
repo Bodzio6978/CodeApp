@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface CodeRepository {
 
-    fun getNotes():Flow<List<Code>>
+    fun getCodes():Flow<List<Code>>
 
     suspend fun insertCode(code:Code)
 

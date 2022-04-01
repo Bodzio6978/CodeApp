@@ -9,7 +9,7 @@ class CodeRepositoryImp(
     private val dao:CodeDao
 ):CodeRepository {
 
-    override fun getNotes(): Flow<List<Code>> {
+    override fun getCodes(): Flow<List<Code>> {
         return dao.getCodes()
     }
 
