@@ -3,6 +3,7 @@
     package="com.gmail.bodziowaty6978.kodyzabka">
 
     <application
+        android:name=".CodeApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KodyZabka">
         <activity
-            android:name=".MainActivity"
+            android:name=".feature_code.presentation.add_edit_code.AddEditCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature_code.presentation.codes.CodeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
