@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.use_case.CodeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,8 +25,6 @@ class CodesViewModel @Inject constructor(
     val state:StateFlow<CodesState> = _state
 
     private var getCodesJob: Job? = null
-
-    private var lastDeletedCode:Code? = null
 
     init {
         getCodes()

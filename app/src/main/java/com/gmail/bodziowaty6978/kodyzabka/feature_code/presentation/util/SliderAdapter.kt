@@ -1,5 +1,6 @@
 package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -14,7 +15,7 @@ import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.oned.Code128Writer
 
-class SliderAdapter(private val codesList: List<Code>) :
+class SliderAdapter(private val codesList: MutableList<Code>) :
     RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
 
     inner class SliderViewHolder(view: View) : RecyclerView.ViewHolder(view) {

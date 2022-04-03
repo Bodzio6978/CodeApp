@@ -9,6 +9,7 @@ import com.gmail.bodziowaty6978.kodyzabka.databinding.ActivityCodeBinding
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util.SliderAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -16,12 +17,13 @@ class CodeActivity : AppCompatActivity() {
 
     private val viewModel: CodesViewModel by viewModels()
     private lateinit var binding: ActivityCodeBinding
+    private val codeItems = mutableListOf<Code>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_code)
 
-        binding = ActivityCodeBinding.inflate(layoutInflater,null,false)
+        binding = ActivityCodeBinding.inflate(layoutInflater, null, false)
         setContentView(binding.root)
 
         setSupportActionBar(binding.tbCode)
@@ -35,15 +37,31 @@ class CodeActivity : AppCompatActivity() {
             }
         }
 
-        val barcodeList = listOf<Code>(
-            Code("983470578",System.currentTimeMillis(),"Boguś"),
-            Code("123456789",System.currentTimeMillis(),"Kinga"),
-            Code("987654321",System.currentTimeMillis(),"Ania"),
-            Code("783427678",System.currentTimeMillis(),"Iwonka"),
-        )
-
-        val adapter = SliderAdapter(barcodeList)
+        val adapter = SliderAdapter(codeItems)
         binding.vp2Code.adapter = adapter
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.state.collect { codeState ->
+                codeState.codes.forEach { code ->
+                    if (!codeItems.contains(code)) {
+                        codeItems.add(code)
+                        binding.vp2Code.adapter?.apply {
+                            notifyItemInserted(codeItems.size - 1)
+                        }
+                    }
+                }
+                codeItems.forEachIndexed { index, code ->
+                    if (!codeState.codes.contains(code)) {
+                        codeItems.remove(code)
+                        binding.vp2Code.adapter?.apply {
+                            notifyItemRemoved(index)
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 
 

@@ -5,10 +5,7 @@ import androidx.room.Room
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.data.data_source.CodeDatabase
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.data.repository.CodeRepositoryImp
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.repository.CodeRepository
-import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.use_case.CodeUseCases
-import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.use_case.DeleteCode
-import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.use_case.GetCodes
-import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.use_case.InsertCode
+import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.use_case.*
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -37,6 +34,7 @@ object AppModule {
     fun provideUseCases(repository:CodeRepository):CodeUseCases = CodeUseCases(
         getCodes = GetCodes(repository),
         deleteCode = DeleteCode(repository),
-        insertCode = InsertCode(repository)
+        insertCode = InsertCode(repository),
+        getCodeById = GetCodeById(repository)
     )
 }
