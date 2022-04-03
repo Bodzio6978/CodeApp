@@ -7,6 +7,8 @@ interface CodeRepository {
 
     fun getCodes():Flow<List<Code>>
 
+    suspend fun getCodeById(id:Int):Code?
+
     suspend fun insertCode(code:Code)
 
     suspend fun deleteCode(code:Code)

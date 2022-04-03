@@ -31,24 +31,6 @@ class CodesViewModel @Inject constructor(
         getCodes()
     }
 
-    private fun onEvent(event: CodesEvent){
-        when(event){
-            is CodesEvent.DeleteNote -> {
-                viewModelScope.launch {
-                    codeUseCases.deleteCode(event.code)
-                    lastDeletedCode = event.code
-                }
-            }
-            is CodesEvent.RestoreCode -> {
-                viewModelScope.launch {
-                    codeUseCases.insertCode(lastDeletedCode ?: return@launch)
-                    lastDeletedCode = null
-                }
-
-            }
-        }
-    }
-
     private fun getCodes(){
         getCodesJob?.cancel()
         getCodesJob = codeUseCases.getCodes().onEach {

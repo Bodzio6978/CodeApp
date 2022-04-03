@@ -13,6 +13,10 @@ class CodeRepositoryImp(
         return dao.getCodes()
     }
 
+    override suspend fun getCodeById(id: Int): Code? {
+        return dao.getCodeById(id)
+    }
+
     override suspend fun insertCode(code: Code) {
         dao.insertCode(code)
     }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Kody Zabka</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="twoje_kody">Twoje kody</string>
+    <string name="zeskanowano">Zeskanowano</string>
+    <string name="code">Code</string>
+    <string name="add_or_edit_a_code">Add or edit a code</string>
+    <string name="edit_codes">Edit codes</string>
 </resources>
