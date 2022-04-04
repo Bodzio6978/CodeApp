@@ -6,10 +6,12 @@ import com.gmail.bodziowaty6978.kodyzabka.feature_code.data.data_source.CodeData
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.data.repository.CodeRepositoryImp
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.repository.CodeRepository
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.use_case.*
+import com.gmail.bodziowaty6978.kodyzabka.util.ResourceProvider
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -31,10 +33,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUseCases(repository:CodeRepository):CodeUseCases = CodeUseCases(
+    fun provideUseCases(repository:CodeRepository, resourceProvider: ResourceProvider):CodeUseCases = CodeUseCases(
         getCodes = GetCodes(repository),
         deleteCode = DeleteCode(repository),
-        insertCode = InsertCode(repository),
+        insertCode = InsertCode(repository,resourceProvider),
         getCodeById = GetCodeById(repository)
     )
+
+    @Provides
+    @Singleton
+    fun provideResourceProvider(app:Application):ResourceProvider = ResourceProvider(app)
 }

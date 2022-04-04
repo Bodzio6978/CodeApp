@@ -1,5 +1,6 @@
 package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -7,13 +8,15 @@ import androidx.lifecycle.lifecycleScope
 import com.gmail.bodziowaty6978.kodyzabka.R
 import com.gmail.bodziowaty6978.kodyzabka.databinding.ActivityCodeBinding
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
+import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.add_edit_code.AddEditCodeActivity
+import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util.OnAdapterItemClickedListener
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util.SliderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CodeActivity : AppCompatActivity() {
+class CodeActivity : AppCompatActivity(), OnAdapterItemClickedListener {
 
     private val viewModel: CodesViewModel by viewModels()
     private lateinit var binding: ActivityCodeBinding
@@ -37,7 +40,14 @@ class CodeActivity : AppCompatActivity() {
             }
         }
 
-        val adapter = SliderAdapter(codeItems)
+        lifecycleScope.launch {
+            binding.fabCode.setOnClickListener {
+                val intent = Intent(this@CodeActivity,AddEditCodeActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        val adapter = SliderAdapter(codeItems, this)
         binding.vp2Code.adapter = adapter
 
         lifecycleScope.launchWhenStarted {
@@ -60,9 +70,10 @@ class CodeActivity : AppCompatActivity() {
                 }
             }
         }
-
-
     }
 
-
+    override fun onAdapterItemClicked(code: Code) {
+        val intent = Intent(this,AddEditCodeActivity::class.java).putExtra("clickedCode",code)
+        startActivity(intent)
+    }
 }

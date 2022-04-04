@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
@@ -15,13 +16,20 @@ import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.oned.Code128Writer
 
-class SliderAdapter(private val codesList: MutableList<Code>) :
+class SliderAdapter(private val codesList: MutableList<Code>, private val onAdapterItemClickedListener: OnAdapterItemClickedListener) :
     RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
 
     inner class SliderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val codeBitmap: ImageView = view.findViewById(R.id.ivCode)
         val codeOwner: TextView = view.findViewById(R.id.tvCodeOwner)
         val code: TextView = view.findViewById(R.id.tvCode)
+
+        init {
+            val layout:LinearLayout = view.findViewById(R.id.llCodeLayout)
+            layout.setOnClickListener {
+                onAdapterItemClickedListener.onAdapterItemClicked(codesList[adapterPosition])
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {

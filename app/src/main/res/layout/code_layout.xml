@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayout"
+    android:id="@+id/llCodeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="5dp"
@@ -25,7 +25,6 @@
         android:id="@+id/ivCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/container"
         android:contentDescription="@string/code" />
 
     <TextView

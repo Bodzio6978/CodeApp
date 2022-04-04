@@ -7,4 +7,12 @@
     <string name="code">Code</string>
     <string name="add_or_edit_a_code">Add or edit a code</string>
     <string name="edit_codes">Edit codes</string>
+    <string name="kod_powinien_miec_12_cyfer">Kod powinien mieć 12 cyfer</string>
+    <string name="kod_nie_moze_byc_pusty">Kod nie może być pusty</string>
+    <string name="dodano_nowy_kod">Dodano nowy kod</string>
+    <string name="kod_powinien_skladac_sie_z_samych_cyfer">Kod powinien składać się z samych cyfer</string>
+    <string name="musisz_pozwolic_na_dostep_do_kamery_jesli">Musisz pozwolić na dostęp do kamery, jeśli chcesz korzystać ze skanera kodów</string>
+    <string name="dodaj_kod">Dodaj kod</string>
+    <string name="do_kogo_nalezy_kod">Do kogo należy kod</string>
+    <string name="kod">Kod</string>
 </resources>

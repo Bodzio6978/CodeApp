@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/drawable/container.xml" value="0.287962962962963" />
-        <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/layout/activity_add_edit_code.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/layout/activity_add_edit_code.xml" value="0.22" />
         <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/layout/activity_code.xml" value="0.22" />
         <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/layout/code_layout.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/layout/fragment_add_edit.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/layout/fragment_code.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/layout/fragment_scanner.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/bodzi/AndroidStudioProjects/KodyZabka/app/src/main/res/layout/slide_code_layout.xml" value="0.2246376811594203" />
       </map>
     </option>
