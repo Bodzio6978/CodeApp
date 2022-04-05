@@ -3,8 +3,10 @@ package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.add_edit_co
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -22,50 +24,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class AddEditCodeActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityAddEditCodeBinding
-    private val viewModel:AddEditViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_code)
-
-        binding = ActivityAddEditCodeBinding.inflate(layoutInflater,null,false)
-        setContentView(binding.root)
-
-
-
-        lifecycleScope.launch {
-            val requestCamera = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
-                if (!isGranted){
-                    Snackbar.make(binding.rlAddEdit,
-                        resources.getString(R.string.musisz_pozwolic_na_dostep_do_kamery_jesli),
-                        Snackbar.LENGTH_LONG)
-                        .show()
-                }
-            }
-
-            requestCamera.launch(android.Manifest.permission.CAMERA)
-        }
-
-
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.codeEventState.collect {
-                when(it){
-                    is AddEditCodeEvent.SaveCode -> {
-                        Snackbar.make(binding.rlAddEdit,resources.getString(R.string.dodano_nowy_kod),Snackbar.LENGTH_LONG).show()
-                    }
-                    is AddEditCodeEvent.ShowSnackbar -> {
-                        Snackbar.make(binding.rlAddEdit,it.message,Snackbar.LENGTH_LONG).show()
-                    }
-                }
-            }
-        }
-
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.fragmentContainerView)
-        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

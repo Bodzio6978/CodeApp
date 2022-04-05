@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlAddEdit"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,57 +12,81 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dodaj_kod"
-            android:textSize="20sp"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
     </Toolbar>
 
     <EditText
-        android:layout_centerInParent="true"
         android:id="@+id/etCodeOwner"
-        android:padding="10dp"
-        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rlCode"
+        android:layout_centerInParent="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_above="@+id/etCode"
         android:layout_marginBottom="20dp"
         android:background="@drawable/container"
         android:hint="@string/do_kogo_nalezy_kod"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:layout_centerInParent="true"
-        android:textAlignment="center"
-        android:drawableEnd="@drawable/ic_bar_code"
-        android:drawableTint="@color/primary"
-        android:drawablePadding="5dp"
         android:padding="10dp"
-        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+    <RelativeLayout
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/container"
-        android:id="@+id/etCode"
+        android:id="@+id/rlCode"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_marginStart="34dp"
+            android:id="@+id/etCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/ibBarcode"
+            android:background="@drawable/container"
+            android:drawablePadding="5dp"
+            android:hint="@string/kod"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/ibBarcode"
+            android:padding="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_bar_code"
+            app:tint="@color/primary"/>
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/scCode"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/kod">
-
-
-    </EditText>
-
+        android:text="@string/dodaj_wiele_kodow"
+        android:textSize="14sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rlCode"
+        android:layout_marginTop="5dp"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_save_24"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_baseline_save_24" />
 
 </RelativeLayout>

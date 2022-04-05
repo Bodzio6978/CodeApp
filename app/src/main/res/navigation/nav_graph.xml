@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/addEditFragment">
+
     <fragment
         android:id="@+id/addEditFragment"
         android:name="com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.add_edit_code.AddEditFragment"
         android:label="fragment_add_edit"
         tools:layout="@layout/fragment_add_edit" >
         <action
-            android:id="@+id/navigateToCodeFragment"
+            android:id="@+id/action_addEditFragment_to_scannerFragment"
             app:destination="@id/scannerFragment" />
     </fragment>
     <fragment
@@ -19,7 +20,7 @@
         android:label="fragment_scanner"
         tools:layout="@layout/fragment_scanner" >
         <action
-            android:id="@+id/navigateToScannerFragment"
+            android:id="@+id/action_scannerFragment_to_addEditFragment"
             app:destination="@id/addEditFragment" />
     </fragment>
 </navigation>

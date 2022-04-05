@@ -1,5 +1,6 @@
 package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.add_edit_code
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,6 +21,9 @@ class AddEditViewModel @Inject constructor(
 
     private val _codeEventState = MutableSharedFlow<AddEditCodeEvent>()
     val codeEventState: SharedFlow<AddEditCodeEvent> = _codeEventState
+    
+    private val _barcodeState = MutableSharedFlow<String>()
+    val barcodeState: SharedFlow<String> = _barcodeState
 
     fun saveCode(code: Code){
         viewModelScope.launch(Dispatchers.IO) {
@@ -31,6 +35,12 @@ class AddEditViewModel @Inject constructor(
                     message = e.message ?: "Couldn't save the code"
                 ))
             }
+        }
+    }
+
+    fun setCodeState(code:String){
+        viewModelScope.launch {
+            _barcodeState.emit(code)
         }
     }
 }

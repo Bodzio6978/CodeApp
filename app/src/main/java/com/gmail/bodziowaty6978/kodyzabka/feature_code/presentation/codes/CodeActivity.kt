@@ -3,6 +3,7 @@ package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.gmail.bodziowaty6978.kodyzabka.R
@@ -52,6 +53,10 @@ class CodeActivity : AppCompatActivity(), OnAdapterItemClickedListener {
 
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect { codeState ->
+                if(codeState.codes.isNotEmpty()){
+                    binding.btScanned.visibility = View.VISIBLE
+                }
+
                 codeState.codes.forEach { code ->
                     if (!codeItems.contains(code)) {
                         codeItems.add(code)
