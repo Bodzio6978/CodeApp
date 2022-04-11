@@ -21,6 +21,8 @@
     </Toolbar>
 
     <EditText
+        android:inputType="text"
+        android:lines="1"
         android:id="@+id/etCodeOwner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,6 +47,8 @@
 
         <EditText
             android:layout_marginStart="34dp"
+            android:lines="1"
+            android:inputType="number"
             android:id="@+id/etCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +58,7 @@
             android:hint="@string/kod"
             android:padding="10dp"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <ImageButton
             android:id="@+id/ibBarcode"
@@ -65,7 +69,8 @@
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
             android:src="@drawable/ic_bar_code"
-            app:tint="@color/primary"/>
+            app:tint="@color/primary"
+            android:contentDescription="@string/scan_barcode" />
 
     </RelativeLayout>
 
@@ -87,6 +92,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_baseline_save_24" />
+        android:src="@drawable/ic_baseline_save_24"
+        android:contentDescription="@string/save_code" />
 
 </RelativeLayout>

@@ -42,7 +42,7 @@ class ScannerFragment : Fragment() {
         codeScanner = CodeScanner(requireActivity(), scannerView)
         codeScanner.decodeCallback = DecodeCallback {
             activity?.runOnUiThread {
-                findNavController().navigate(R.id.addEditFragment)
+                findNavController().navigateUp()
                 viewModel.setCodeState(it.text)
             }
         }

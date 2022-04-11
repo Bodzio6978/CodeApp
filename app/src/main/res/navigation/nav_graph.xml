@@ -18,9 +18,5 @@
         android:id="@+id/scannerFragment"
         android:name="com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.add_edit_code.ScannerFragment"
         android:label="fragment_scanner"
-        tools:layout="@layout/fragment_scanner" >
-        <action
-            android:id="@+id/action_scannerFragment_to_addEditFragment"
-            app:destination="@id/addEditFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_scanner" />
 </navigation>

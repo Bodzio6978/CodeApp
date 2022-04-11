@@ -101,13 +101,16 @@ class AddEditFragment : Fragment() {
             viewModel.codeEventState.collect {
                 when(it){
                     is AddEditCodeEvent.SaveCode -> {
-                        Snackbar.make(rlAdd,resources.getString(R.string.dodano_nowy_kod),
-                            Snackbar.LENGTH_LONG).show()
 
                         if (!scCode.isChecked){
                             startActivity(Intent(requireContext(),CodeActivity::class.java))
                         }
 
+                        Snackbar.make(rlAdd,resources.getString(R.string.dodano_nowy_kod),
+                            Snackbar.LENGTH_LONG).show()
+
+                        etCodeOwner.text.clear()
+                        etCode.text.clear()
                     }
                     is AddEditCodeEvent.ShowSnackbar -> {
                         Snackbar.make(rlAdd,it.message, Snackbar.LENGTH_LONG).show()
