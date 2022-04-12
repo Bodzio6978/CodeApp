@@ -10,14 +10,14 @@ import com.gmail.bodziowaty6978.kodyzabka.R
 import com.gmail.bodziowaty6978.kodyzabka.databinding.ActivityCodeBinding
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.add_edit_code.AddEditCodeActivity
-import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util.OnAdapterItemClickedListener
+import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes_list.CodesListActivity
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util.SliderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CodeActivity : AppCompatActivity(), OnAdapterItemClickedListener {
+class CodeActivity : AppCompatActivity() {
 
     private val viewModel: CodesViewModel by viewModels()
     private lateinit var binding: ActivityCodeBinding
@@ -33,6 +33,12 @@ class CodeActivity : AppCompatActivity(), OnAdapterItemClickedListener {
         setSupportActionBar(binding.tbCode)
 
         lifecycleScope.launch {
+            binding.ibEditCode.setOnClickListener {
+                startActivity(Intent(this@CodeActivity, CodesListActivity::class.java))
+            }
+        }
+
+        lifecycleScope.launch {
             binding.btScanned.setOnClickListener {
                 binding.vp2Code.apply {
                     currentItem += 1
@@ -43,21 +49,21 @@ class CodeActivity : AppCompatActivity(), OnAdapterItemClickedListener {
 
         lifecycleScope.launch {
             binding.fabCode.setOnClickListener {
-                val intent = Intent(this@CodeActivity,AddEditCodeActivity::class.java)
+                val intent = Intent(this@CodeActivity, AddEditCodeActivity::class.java)
                 startActivity(intent)
             }
         }
 
-        val adapter = SliderAdapter(codeItems, this)
+        val adapter = SliderAdapter(codeItems)
         binding.vp2Code.adapter = adapter
 
         lifecycleScope.launchWhenStarted {
-            viewModel.state.collect { codeState ->
-                if(codeState.codes.isNotEmpty()){
+            viewModel.codes.collect { codes ->
+                if (codes.isNotEmpty()) {
                     binding.btScanned.visibility = View.VISIBLE
                 }
 
-                codeState.codes.forEach { code ->
+                codes.forEach { code ->
                     if (!codeItems.contains(code)) {
                         codeItems.add(code)
                         binding.vp2Code.adapter?.apply {
@@ -66,7 +72,7 @@ class CodeActivity : AppCompatActivity(), OnAdapterItemClickedListener {
                     }
                 }
                 codeItems.forEachIndexed { index, code ->
-                    if (!codeState.codes.contains(code)) {
+                    if (!codes.contains(code)) {
                         codeItems.remove(code)
                         binding.vp2Code.adapter?.apply {
                             notifyItemRemoved(index)
@@ -75,10 +81,5 @@ class CodeActivity : AppCompatActivity(), OnAdapterItemClickedListener {
                 }
             }
         }
-    }
-
-    override fun onAdapterItemClicked(code: Code) {
-        val intent = Intent(this,AddEditCodeActivity::class.java).putExtra("clickedCode",code)
-        startActivity(intent)
     }
 }

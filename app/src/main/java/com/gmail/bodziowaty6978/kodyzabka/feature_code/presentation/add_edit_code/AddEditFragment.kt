@@ -104,6 +104,7 @@ class AddEditFragment : Fragment() {
 
                         if (!scCode.isChecked){
                             startActivity(Intent(requireContext(),CodeActivity::class.java))
+                            activity?.finish()
                         }
 
                         Snackbar.make(rlAdd,resources.getString(R.string.dodano_nowy_kod),

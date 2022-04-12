@@ -3,6 +3,7 @@
     package="com.gmail.bodziowaty6978.kodyzabka">
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -15,6 +16,9 @@
         android:roundIcon="@drawable/ic_frog_svgrepo_com"
         android:supportsRtl="true"
         android:theme="@style/Theme.KodyZabka">
+        <activity
+            android:name=".feature_code.presentation.codes_list.CodesListActivity"
+            android:exported="false" />
         <activity
             android:name=".feature_code.presentation.add_edit_code.AddEditCodeActivity"
             android:exported="false" />

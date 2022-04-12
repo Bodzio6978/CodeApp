@@ -9,10 +9,7 @@ import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.use_case.CodeUseCa
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,9 +17,9 @@ import javax.inject.Inject
 class CodesViewModel @Inject constructor(
     private val codeUseCases: CodeUseCases
 ):ViewModel() {
-
-    private val _state = MutableStateFlow(CodesState(codes = emptyList()))
-    val state:StateFlow<CodesState> = _state
+    
+    private val _codes = MutableSharedFlow<List<Code>>()
+    val codes: SharedFlow<List<Code>> = _codes
 
     private var getCodesJob: Job? = null
 
@@ -33,7 +30,7 @@ class CodesViewModel @Inject constructor(
     private fun getCodes(){
         getCodesJob?.cancel()
         getCodesJob = codeUseCases.getCodes().onEach {
-            _state.value = state.value.copy(codes = it)
+            _codes.emit(it)
         }.launchIn(viewModelScope)
     }
 }
