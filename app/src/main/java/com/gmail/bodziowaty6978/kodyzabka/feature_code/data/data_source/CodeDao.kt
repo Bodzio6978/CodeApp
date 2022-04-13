@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface CodeDao {
 
     @Query("SELECT * FROM code")
-    fun getCodes(): Flow<List<Code>>
+    fun getCodes(): List<Code>
 
     @Query("SELECT * FROM code WHERE id=:id")
     fun getCodeById(id:Int):Code?

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class GetCodes(
     private val repository: CodeRepository
 ) {
-    operator fun invoke():Flow<List<Code>>{
+    operator fun invoke():List<Code>{
         return repository.getCodes()
     }
 }

@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Kody żabka</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="twoje_kody">Twoje kody</string>
     <string name="zeskanowano">Zeskanowano</string>
     <string name="code">Code</string>
@@ -13,6 +11,8 @@
     <string name="kod_powinien_skladac_sie_z_samych_cyfer">Kod powinien składać się z samych cyfer</string>
     <string name="musisz_pozwolic_na_dostep_do_kamery_jesli">Musisz pozwolić na dostęp do kamery, jeśli chcesz korzystać ze skanera kodów</string>
     <string name="dodaj_kod">Dodaj kod</string>
+    <string name="usunieto_kod">Usunięto kod</string>
+    <string name="przywroc">Przywróć</string>
     <string name="do_kogo_nalezy_kod">Do kogo należy kod</string>
     <string name="kod">Kod</string>
     <string name="dodaj_wiele_kodow">Dodaj wiele kodów</string>

@@ -1,11 +1,15 @@
 package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.gmail.bodziowaty6978.kodyzabka.R
 import com.gmail.bodziowaty6978.kodyzabka.databinding.ActivityCodeBinding
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
@@ -32,6 +36,8 @@ class CodeActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.tbCode)
 
+        setUpRecyclerView()
+
         lifecycleScope.launch {
             binding.ibEditCode.setOnClickListener {
                 startActivity(Intent(this@CodeActivity, CodesListActivity::class.java))
@@ -53,9 +59,28 @@ class CodeActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+    }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setUpRecyclerView(){
         val adapter = SliderAdapter(codeItems)
         binding.vp2Code.adapter = adapter
+
+        lifecycleScope.launch {
+            binding.vp2Code.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    viewModel.updateCode(
+                        code = codeItems[position].copy(
+                            timeStamp = System.currentTimeMillis()
+                        )
+                    )
+                }
+
+            })
+        }
 
         lifecycleScope.launchWhenStarted {
             viewModel.codes.collect { codes ->
@@ -63,23 +88,15 @@ class CodeActivity : AppCompatActivity() {
                     binding.btScanned.visibility = View.VISIBLE
                 }
 
-                codes.forEach { code ->
-                    if (!codeItems.contains(code)) {
-                        codeItems.add(code)
-                        binding.vp2Code.adapter?.apply {
-                            notifyItemInserted(codeItems.size - 1)
-                        }
-                    }
-                }
-                codeItems.forEachIndexed { index, code ->
-                    if (!codes.contains(code)) {
-                        codeItems.remove(code)
-                        binding.vp2Code.adapter?.apply {
-                            notifyItemRemoved(index)
-                        }
-                    }
-                }
+                codeItems.clear()
+                codeItems.addAll(codes)
+                binding.vp2Code.adapter?.notifyDataSetChanged()
             }
         }
+    }
+
+    override fun onRestart() {
+        viewModel.getCodes()
+        super.onRestart()
     }
 }

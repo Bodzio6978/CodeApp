@@ -1,5 +1,6 @@
 package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,16 +22,21 @@ class CodesViewModel @Inject constructor(
     private val _codes = MutableSharedFlow<List<Code>>()
     val codes: SharedFlow<List<Code>> = _codes
 
-    private var getCodesJob: Job? = null
-
     init {
         getCodes()
     }
 
-    private fun getCodes(){
-        getCodesJob?.cancel()
-        getCodesJob = codeUseCases.getCodes().onEach {
-            _codes.emit(it)
-        }.launchIn(viewModelScope)
+    fun updateCode(code:Code){
+        viewModelScope.launch(Dispatchers.IO) {
+            codeUseCases.insertCode(code)
+        }
+    }
+
+    fun getCodes(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val codes = codeUseCases.getCodes().toMutableList()
+            codes.sortBy { it.timeStamp }
+            _codes.emit(codes)
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes_list
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -12,8 +13,11 @@ import com.gmail.bodziowaty6978.kodyzabka.databinding.ActivityCodesListBinding
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes_list.OnAdapterItemClickedListener
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util.CodesListAdapter
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.channels.consume
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -40,8 +44,11 @@ class CodesListActivity : AppCompatActivity(), OnAdapterItemClickedListener {
             }
         }
 
+        collectUiState()
+
         lifecycleScope.launchWhenStarted {
             viewModel.codes.collect { codes ->
+                Log.e("huj",codes.toString())
                 codes.forEach { code ->
                     if (!codeItems.contains(code)) {
                         codeItems.add(code)
@@ -61,6 +68,10 @@ class CodesListActivity : AppCompatActivity(), OnAdapterItemClickedListener {
 
             }
         }
+    }
+
+    private fun collectUiState(){
+        // TODO: Collecting ui state
     }
 
     override fun onAdapterItemClicked(codeEvent: CodeEvent) {
