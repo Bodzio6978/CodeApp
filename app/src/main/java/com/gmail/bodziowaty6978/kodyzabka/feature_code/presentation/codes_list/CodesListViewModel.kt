@@ -26,10 +26,6 @@ class CodesListViewModel @Inject constructor(
 
     private var lastDeletedCode: Code? = null
 
-    init {
-        getCodes()
-    }
-
     fun onEvent(codeEvent: CodeEvent) {
         when (codeEvent) {
             is CodeEvent.DeleteCode -> {
@@ -52,7 +48,7 @@ class CodesListViewModel @Inject constructor(
         }
     }
 
-    private fun getCodes() {
+    fun getCodes() {
         viewModelScope.launch(Dispatchers.IO) {
             val codes = useCases.getCodes()
             _codes.emit(codes)

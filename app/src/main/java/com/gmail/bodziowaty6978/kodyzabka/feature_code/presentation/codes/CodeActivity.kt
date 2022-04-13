@@ -18,6 +18,7 @@ import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes_list.C
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util.SliderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -83,7 +84,7 @@ class CodeActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.codes.collect { codes ->
+            viewModel.codes.collectLatest { codes ->
                 if (codes.isNotEmpty()) {
                     binding.btScanned.visibility = View.VISIBLE
                 }
@@ -95,8 +96,8 @@ class CodeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRestart() {
+    override fun onStart() {
         viewModel.getCodes()
-        super.onRestart()
+        super.onStart()
     }
 }

@@ -22,10 +22,6 @@ class CodesViewModel @Inject constructor(
     private val _codes = MutableSharedFlow<List<Code>>()
     val codes: SharedFlow<List<Code>> = _codes
 
-    init {
-        getCodes()
-    }
-
     fun updateCode(code:Code){
         viewModelScope.launch(Dispatchers.IO) {
             codeUseCases.insertCode(code)

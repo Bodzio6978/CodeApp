@@ -16,17 +16,12 @@ import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes_list.O
 class CodesListAdapter(private val codesList:MutableList<Code>, private val onAdapterItemClickedListener: OnAdapterItemClickedListener): RecyclerView.Adapter<CodesListAdapter.CodesListViewHolder>() {
 
     inner class CodesListViewHolder(view:View) : RecyclerView.ViewHolder(view){
-        val layout:LinearLayout = view.findViewById(R.id.llList)
-        val codeBitmap: ImageView = layout.findViewById(R.id.ivCode)
-        val codeOwner: TextView = layout.findViewById(R.id.tvCodeOwner)
-        val code: TextView = layout.findViewById(R.id.tvCode)
-        private val editImageButton:ImageButton = view.findViewById(R.id.ibDeleteCodeList)
+        val code: TextView = view.findViewById(R.id.tvCodeList)
+        val codeOwner: TextView = view.findViewById(R.id.tvCodeOwnerList)
+        private val deleteImageButton:ImageButton = view.findViewById(R.id.ibDeleteCodeList)
 
         init {
-            codeBitmap.visibility = View.GONE
-
-            editImageButton.setOnClickListener {
-
+            deleteImageButton.setOnClickListener {
             }
         }
     }
@@ -40,9 +35,6 @@ class CodesListAdapter(private val codesList:MutableList<Code>, private val onAd
         val codeItem = codesList[position]
         holder.code.text = codeItem.code
         holder.codeOwner.text = codeItem.user
-        holder.codeBitmap.setImageBitmap(
-            holder.generateCodeBitmap(codeItem.code)
-        )
     }
 
     override fun getItemCount(): Int {

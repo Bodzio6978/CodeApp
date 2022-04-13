@@ -77,4 +77,9 @@ class CodesListActivity : AppCompatActivity(), OnAdapterItemClickedListener {
     override fun onAdapterItemClicked(codeEvent: CodeEvent) {
         viewModel.onEvent(codeEvent)
     }
+
+    override fun onStart() {
+        viewModel.getCodes()
+        super.onStart()
+    }
 }
