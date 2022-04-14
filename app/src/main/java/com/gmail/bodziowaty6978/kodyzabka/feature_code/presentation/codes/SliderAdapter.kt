@@ -1,4 +1,4 @@
-package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util
+package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes
 
 import android.graphics.Bitmap
 import android.graphics.Color

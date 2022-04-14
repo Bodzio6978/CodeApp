@@ -35,6 +35,7 @@ object AppModule {
     @Singleton
     fun provideUseCases(repository:CodeRepository, resourceProvider: ResourceProvider):CodeUseCases = CodeUseCases(
         getCodes = GetCodes(repository),
+        getCodesFlow = GetCodesFlow(repository),
         deleteCode = DeleteCode(repository),
         insertCode = InsertCode(repository,resourceProvider),
         getCodeById = GetCodeById(repository)

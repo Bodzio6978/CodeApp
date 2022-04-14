@@ -10,8 +10,12 @@ class CodeRepositoryImp(
     private val dao:CodeDao
 ):CodeRepository {
 
-    override fun getCodes(): List<Code> {
+    override suspend fun getCodes(): List<Code> {
         return dao.getCodes()
+    }
+
+    override fun getCodesFlow(): Flow<List<Code>> {
+        return dao.getCodesFlow()
     }
 
     override suspend fun getCodeById(id: Int): Code? {

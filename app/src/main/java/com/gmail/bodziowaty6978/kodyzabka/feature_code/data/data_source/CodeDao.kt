@@ -10,6 +10,9 @@ interface CodeDao {
     @Query("SELECT * FROM code")
     fun getCodes(): List<Code>
 
+    @Query("SELECT * FROM code")
+    fun getCodesFlow(): Flow<List<Code>>
+
     @Query("SELECT * FROM code WHERE id=:id")
     fun getCodeById(id:Int):Code?
 

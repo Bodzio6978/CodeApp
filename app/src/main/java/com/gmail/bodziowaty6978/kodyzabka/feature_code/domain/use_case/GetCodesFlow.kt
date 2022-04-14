@@ -4,10 +4,11 @@ import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.repository.CodeRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetCodes(
+class GetCodesFlow(
     private val repository: CodeRepository
-) {
-    suspend operator fun invoke():List<Code>{
-        return repository.getCodes()
+){
+
+    operator fun invoke():Flow<List<Code>>{
+        return repository.getCodesFlow()
     }
 }

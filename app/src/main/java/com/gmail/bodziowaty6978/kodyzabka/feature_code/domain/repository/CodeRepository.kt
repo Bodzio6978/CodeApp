@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface CodeRepository {
 
-    fun getCodes():List<Code>
+    suspend fun getCodes():List<Code>
+
+    fun getCodesFlow():Flow<List<Code>>
 
     suspend fun getCodeById(id:Int):Code?
 

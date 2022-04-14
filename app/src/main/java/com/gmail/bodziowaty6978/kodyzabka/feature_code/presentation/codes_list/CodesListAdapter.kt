@@ -1,17 +1,13 @@
-package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.util
+package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes_list
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.bodziowaty6978.kodyzabka.R
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
-import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes_list.OnAdapterItemClickedListener
 
 class CodesListAdapter(private val codesList:MutableList<Code>, private val onAdapterItemClickedListener: OnAdapterItemClickedListener): RecyclerView.Adapter<CodesListAdapter.CodesListViewHolder>() {
 
@@ -22,6 +18,7 @@ class CodesListAdapter(private val codesList:MutableList<Code>, private val onAd
 
         init {
             deleteImageButton.setOnClickListener {
+                onAdapterItemClickedListener.onAdapterItemClicked(CodeEvent.DeleteCode(code = codesList[adapterPosition]))
             }
         }
     }
