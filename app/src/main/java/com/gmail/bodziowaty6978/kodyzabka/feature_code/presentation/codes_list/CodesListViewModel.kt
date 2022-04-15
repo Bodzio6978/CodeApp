@@ -26,10 +26,6 @@ class CodesListViewModel @Inject constructor(
 
     private var job:Job? = null
 
-    init {
-        getCodes()
-    }
-
     fun onEvent(codeEvent: CodeEvent) {
         when (codeEvent) {
             is CodeEvent.DeleteCode -> {
@@ -51,7 +47,7 @@ class CodesListViewModel @Inject constructor(
         }
     }
 
-    private fun getCodes() {
+    fun getCodes() {
         job?.cancel()
         job = useCases.getCodesFlow().onEach { codes ->
             _codes.emit(codes)

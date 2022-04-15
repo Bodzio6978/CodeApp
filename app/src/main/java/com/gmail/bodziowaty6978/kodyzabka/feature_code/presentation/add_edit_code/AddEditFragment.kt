@@ -18,10 +18,7 @@ import kotlinx.coroutines.launch
 import android.view.MotionEvent
 
 import android.view.View.OnTouchListener
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.ViewModelProvider
@@ -46,6 +43,7 @@ class AddEditFragment : Fragment() {
     private lateinit var ibBarcode:ImageButton
     private lateinit var rlAdd:RelativeLayout
     private lateinit var scCode:SwitchCompat
+    private lateinit var tvTitle:TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +59,7 @@ class AddEditFragment : Fragment() {
         ibBarcode = view.findViewById(R.id.ibBarcode)
         rlAdd = view.findViewById(R.id.rlAddEdit)
         scCode = view.findViewById(R.id.scCode)
+        tvTitle = view.findViewById(R.id.tvTitleAddEdit)
 
         collectBarcodeState()
         collectCodeEventState()
@@ -93,6 +92,18 @@ class AddEditFragment : Fragment() {
                 findNavController().navigate(R.id.scannerFragment)
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.editedCodeState.collect { code ->
+                if (code!=null){
+                    etCode.setText(code.code)
+                    etCodeOwner.setText(code.user)
+                    tvTitle.text = resources.getString(R.string.edytuj_kod)
+                    scCode.visibility = View.GONE
+                }
+            }
+        }
+
         return view
     }
 
@@ -101,7 +112,6 @@ class AddEditFragment : Fragment() {
             viewModel.codeEventState.collect {
                 when(it){
                     is AddEditCodeEvent.SaveCode -> {
-
                         if (!scCode.isChecked){
                             startActivity(Intent(requireContext(),CodeActivity::class.java))
                             activity?.finish()

@@ -1,5 +1,6 @@
 package com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.codes_list
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gmail.bodziowaty6978.kodyzabka.R
 import com.gmail.bodziowaty6978.kodyzabka.databinding.ActivityCodesListBinding
 import com.gmail.bodziowaty6978.kodyzabka.feature_code.domain.model.Code
+import com.gmail.bodziowaty6978.kodyzabka.feature_code.presentation.add_edit_code.AddEditCodeActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -33,6 +35,8 @@ class CodesListActivity : AppCompatActivity(), OnAdapterItemClickedListener {
         binding.rvCodesList.adapter = CodesListAdapter(codeItems, this)
         binding.rvCodesList.layoutManager = LinearLayoutManager(this)
 
+        viewModel.getCodes()
+
         lifecycleScope.launch {
             binding.ibBack.setOnClickListener {
                 super.onBackPressed()
@@ -44,24 +48,6 @@ class CodesListActivity : AppCompatActivity(), OnAdapterItemClickedListener {
                 codeItems.clear()
                 codeItems.addAll(codes)
                 binding.rvCodesList.adapter?.notifyDataSetChanged()
-
-//                codes.forEach { code ->
-//                    if (!codeItems.contains(code)) {
-//                        codeItems.add(code)
-//                        binding.rvCodesList.adapter?.apply {
-//                            notifyItemInserted(codeItems.size - 1)
-//                        }
-//                    }
-//                }
-//                codeItems.forEachIndexed { index, code ->
-//                    if (!codes.contains(code)) {
-//                        codeItems.remove(code)
-//                        binding.rvCodesList.adapter?.apply {
-//                            notifyItemRemoved(index)
-//                        }
-//                    }
-//                }
-
             }
         }
     }
@@ -76,7 +62,8 @@ class CodesListActivity : AppCompatActivity(), OnAdapterItemClickedListener {
                 }.show()
             }
             is CodeEvent.EditCode -> {
-
+                val intent = Intent(this,AddEditCodeActivity::class.java).putExtra("codeId",codeEvent.codeId)
+                startActivity(intent)
             }
             is CodeEvent.RestoreCode-> {
                 Snackbar.make(binding.clCodeList,resources.getString(R.string.przywrocono_kod),Snackbar.LENGTH_SHORT).show()

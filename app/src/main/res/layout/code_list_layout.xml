@@ -11,6 +11,36 @@
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp">
 
+    <RelativeLayout
+        android:id="@+id/rlCodeList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ibDeleteCodeList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvCodeOwnerList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:id="@+id/tvCodeList"
+            android:layout_below="@+id/tvCodeOwnerList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"/>
+
+
+    </RelativeLayout>
+
     <ImageButton
         android:id="@+id/ibDeleteCodeList"
         android:layout_width="wrap_content"
@@ -23,24 +53,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:id="@+id/tvCodeOwnerList"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/ibDeleteCodeList"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvCodeList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ibDeleteCodeList"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCodeOwnerList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

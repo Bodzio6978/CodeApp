@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.bodziowaty6978.kodyzabka.R
@@ -15,10 +16,14 @@ class CodesListAdapter(private val codesList:MutableList<Code>, private val onAd
         val code: TextView = view.findViewById(R.id.tvCodeList)
         val codeOwner: TextView = view.findViewById(R.id.tvCodeOwnerList)
         private val deleteImageButton:ImageButton = view.findViewById(R.id.ibDeleteCodeList)
+        private val codeListLayout:RelativeLayout = view.findViewById(R.id.rlCodeList)
 
         init {
             deleteImageButton.setOnClickListener {
                 onAdapterItemClickedListener.onAdapterItemClicked(CodeEvent.DeleteCode(code = codesList[adapterPosition]))
+            }
+            codeListLayout.setOnClickListener {
+                onAdapterItemClickedListener.onAdapterItemClicked(CodeEvent.EditCode(codeId = codesList[adapterPosition].id!!))
             }
         }
     }

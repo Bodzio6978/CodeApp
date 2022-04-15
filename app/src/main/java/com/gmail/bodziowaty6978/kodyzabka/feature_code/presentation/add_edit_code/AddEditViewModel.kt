@@ -10,7 +10,9 @@ import com.gmail.bodziowaty6978.kodyzabka.util.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,19 +23,36 @@ class AddEditViewModel @Inject constructor(
 
     private val _codeEventState = MutableSharedFlow<AddEditCodeEvent>()
     val codeEventState: SharedFlow<AddEditCodeEvent> = _codeEventState
-    
+
+    private val _editedCodeState = MutableStateFlow<Code?>(null)
+    val editedCodeState:StateFlow<Code?> = _editedCodeState
+
     private val _barcodeState = MutableSharedFlow<String>()
     val barcodeState: SharedFlow<String> = _barcodeState
 
     fun saveCode(code: Code){
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                useCases.insertCode(code)
+                val insertCode = if (editedCodeState.value!=null){
+                    code.copy(id = editedCodeState.value!!.id!!)
+                }else code
+
+                useCases.insertCode(insertCode!!)
                 _codeEventState.emit(AddEditCodeEvent.SaveCode)
             }catch (e:Exception){
                 _codeEventState.emit(AddEditCodeEvent.ShowSnackbar(
                     message = e.message ?: "Couldn't save the code"
                 ))
+            }
+        }
+    }
+
+    fun getEditedCode(id:Int?){
+        if (id!=0&&id!=null){
+            viewModelScope.launch(Dispatchers.IO) {
+                _editedCodeState.emit(
+                    useCases.getCodeById(id)
+                )
             }
         }
     }

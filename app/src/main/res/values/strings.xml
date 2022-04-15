@@ -19,4 +19,5 @@
     <string name="dodaj_wiele_kodow">Dodaj wiele kodów</string>
     <string name="scan_barcode">scan barcode</string>
     <string name="save_code">save code</string>
+    <string name="edytuj_kod">Edytuj kod</string>
 </resources>
